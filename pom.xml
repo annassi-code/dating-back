@@ -15,6 +15,9 @@
         <version>2.3.0.RELEASE</version>
     </parent>
 
+    <properties>
+    </properties>
+
     <dependencies>
         <!-- Spring mvc, rest -->
         <dependency>
