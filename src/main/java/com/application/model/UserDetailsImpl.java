@@ -8,8 +8,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @AllArgsConstructor
-public class UserAuthentication implements UserDetails {
-    private String name;
+public class UserDetailsImpl implements UserDetails {
+    private String email;
+    private String userName;
     private String password;
 
     @Override
@@ -24,7 +25,7 @@ public class UserAuthentication implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return userName;
     }
 
     @Override
@@ -46,4 +47,6 @@ public class UserAuthentication implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String getEmail() { return email; }
 }

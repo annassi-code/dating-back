@@ -25,27 +25,32 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @PostMapping("/api/signin")
-    public SignInResponse signIn(@RequestBody SignInRequest signInRequest) throws Exception {
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword())
-            );
+    @PostMapping("/api/auth/signin")
+    public SignInResponse signIn(@RequestBody SignInRequest signInRequest){
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword())
+        );
 
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            return new SignInResponse(JwtTokenUtil.generateToken(userDetails));
-        } catch (Exception e) {
-            throw new Exception("USER_DISABLED", e);
-        }
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        return new SignInResponse(JwtTokenUtil.generateToken(userDetails));
+
     }
 
-    @PostMapping("/api/signup")
+    @PostMapping("/api/auth/signup")
     public SingUpResponse signUp(@RequestBody SignUpRequest signUpRequest) throws Exception {
+
 
         return null;
     }
+
+    public String signOut() throws Exception{
+        return null;
+    }
+
 
     @GetMapping("/users")
     public List<User> getAllUsers() {

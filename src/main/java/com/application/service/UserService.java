@@ -1,6 +1,6 @@
 package com.application.service;
 
-import com.application.model.UserAuthentication;
+import com.application.model.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,13 +24,10 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
+        User user = userRepository.findByEmail(username)
+                .orElseThrow(()-> new UsernameNotFoundException("ta gueule"));
 
-        if (!user.isPresent()) {
-            throw new UsernameNotFoundException(" ta gueule");
-        }
-
-        return new UserAuthentication(user.get().getUsername(), user.get().getPassword());
+        return new UserDetailsImpl(user.getEmail(),user.getUsername(), user.getPassword());
     }
 
     public List<User> getAllUsers() {
@@ -47,7 +44,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User getUserByName(String username) {
-        return userRepository.findByUsername(username).get();
+        return userRepository.findByEmail(username).get();
     }
 
 }

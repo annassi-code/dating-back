@@ -23,12 +23,12 @@ public class SpringWebSecurity extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-    /*
+
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
-    */
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -51,7 +51,7 @@ public class SpringWebSecurity extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+                .authorizeRequests().antMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class);
