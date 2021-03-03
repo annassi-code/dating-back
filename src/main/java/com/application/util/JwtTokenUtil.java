@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -13,7 +12,7 @@ import java.util.Map;
 
 @Component
 public class JwtTokenUtil {
-
+/*
     private static final String CLAIMS_SUBJECT = "sub";
     private static final String CLAIMS_CREATED = "created";
     private static Long TOKEN_VALIDITY;
@@ -63,4 +62,6 @@ public class JwtTokenUtil {
     private void setTokenValidity(long validity){
         TOKEN_VALIDITY = validity;
     }
+    */
+
 }

@@ -5,20 +5,17 @@ import com.application.model.request.SignUpRequest;
 import com.application.model.response.SignInResponse;
 import com.application.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.http.MediaType;
+
 import org.springframework.web.bind.annotation.*;
-import com.application.repository.entity.User;
-import com.application.service.UserService;
+//import com.application.repository.entity.User;
+//import com.application.service.UserService;
 
 import java.util.List;
 
 @RestController
 public class AuthenticationController {
-
+/*
     @Autowired
     private UserService userService;
 
@@ -27,7 +24,6 @@ public class AuthenticationController {
 
     @PostMapping("/api/auth/signin")
     public SignInResponse signIn(@RequestBody SignInRequest signInRequest){
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword())
         );
@@ -41,7 +37,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/api/auth/signup")
-    public SingUpResponse signUp(@RequestBody SignUpRequest signUpRequest) throws Exception {
+    public String signUp(@RequestBody SignUpRequest signUpRequest) throws Exception {
 
 
         return null;
@@ -71,5 +67,25 @@ public class AuthenticationController {
     @GetMapping("/restricted")
     public String restricted() {
         return "new alae ";
+    }
+*/
+
+    /*-----------------------------------------------------------------------------------------------------*/
+    @RequestMapping(path = {"/unsecured"})
+    public String noSecuredEndpoint(){
+        return "This is an unsecured endpoint payload";
+    }
+
+    @RequestMapping("/")
+    public String hello() {
+        return "Hello World";
+    }
+    @RequestMapping("/admin")
+    public String adminSecuredEndpoint(){
+        return "This is an ADMIN endpoint payload";
+    }
+    @RequestMapping("/user")
+    public String userSecuredEndpoint(){
+        return "This is an USER endpoint payload";
     }
 }
