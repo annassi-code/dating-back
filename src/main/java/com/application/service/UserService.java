@@ -23,15 +23,24 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(()-> new UsernameNotFoundException("ta gueule"));
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(login)
+                .orElseThrow(() -> new UsernameNotFoundException("ta gueule"));
 
-        return new UserDetailsImpl(user.getEmail(),user.getUsername(), user.getPassword());
+        return new UserDetailsImpl(user.getEmail(), user.getUsername(), user.getPassword());
     }
 
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return
+                userRepository.findAll();
+    }
+
+    public boolean isEmailExisting(String email){
+        return userRepository.existsUserByEmail(email);
+    }
+
+    public User isUsernameExisting(String username) {
+        return userRepository.findByEmail(username).get();
     }
 
     public void saveOrUpdate(User user) {
@@ -41,10 +50,6 @@ public class UserService implements UserDetailsService {
 
     public void delete(int id) {
         userRepository.deleteById(id);
-    }
-
-    public User getUserByName(String username) {
-        return userRepository.findByEmail(username).get();
     }
 
 }

@@ -3,6 +3,7 @@ package com.application.repository.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.security.Timestamp;
 
 @Entity
 @Table(name = "user",
@@ -27,6 +28,8 @@ public class User {
     @NotBlank
     @Size(max = 120)
     private String password;
+
+    private Timestamp createAt;
 
     public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) String email, @NotBlank @Size(max = 120) String password) {
         this.username = username;

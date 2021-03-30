@@ -1,9 +1,10 @@
 package com.application.model.request;
 
 import lombok.Data;
+import lombok.NonNull;
 
 @Data
-public class SignInRequest {
-    private String email;
+public class SignInRequestDto {
+    private String login;
     private String password;
 }

@@ -4,6 +4,7 @@ import com.application.service.UserService;
 import com.application.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.annotation.Configurations;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +16,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.*;
 import java.io.IOException;
 
 public class AuthenticationFilter extends OncePerRequestFilter {
@@ -40,6 +42,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
                 if (JwtTokenUtil.isTokenValid(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                    // After setting the Authentication in the context, we specify that the current user is authenticated.
+                    // So it passes the Spring Security Configurations successfully.
                     securityContext.setAuthentication(authenticationToken);
                 }
             }
