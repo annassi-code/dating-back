@@ -1,5 +1,5 @@
 package com.application.service;
-
+/*
 import com.application.model.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -53,3 +53,4 @@ public class UserService implements UserDetailsService {
     }
 
 }
+*/

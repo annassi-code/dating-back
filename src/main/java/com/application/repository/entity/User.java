@@ -3,8 +3,12 @@ package com.application.repository.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+<<<<<<< HEAD
 import java.security.Timestamp;
 
+=======
+/*
+>>>>>>> c785f471edb45ef8e58b3c6658c338ade09209a1
 @Entity
 @Table(name = "user",
         uniqueConstraints = {
@@ -37,6 +41,10 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -65,3 +73,4 @@ public class User {
         this.password = password;
     }
 }
+*/
